@@ -5,34 +5,18 @@ require 'optparse'
 
 setup = false
 organization = nil
-options = {}
 
-options_parser = OptionParser.new do |opts|
+OptionParser.new do |opts|
   opts.banner = "Usage: reposit <repository_name> [options]"
 
   opts.on("-s", "--setup", "Reset your GitHub credentials") do |s|
     setup = true
   end
 
-  opts.on("-o", "--organzation NAME", "Create (private) repository on an organization") do |org|
-    options[:organization] = org
+  opts.on("-o", "--organzation NAME", "Create (private) repository on an organization") do |o|
+    organization = o
   end
-end
-
-begin
-  options_parser.parse!
-  mandatory = [:organization]
-  missing = mandatory.select{ |param| options[param].nil? }
-  if not missing.empty?
-    puts "Missing options: #{missing.join(', ')}"
-    puts options_parser
-    exit
-  end
-rescue OptionParser::InvalidOption, OptionParser::MissingArgument
-  puts $!.to_s
-  puts options_parser
-  exit
-end  
+end.parse!
 
 if setup
   path = File.expand_path('~') + '/.reposit'
@@ -43,9 +27,9 @@ else
     puts `reposit --help`
   elsif !Reposit::SetupChecker.check
     Reposit::CredentialsSetter.run
-    Reposit::RepositoryMaker.run(ARGV[0], options[:organization])
+    Reposit::RepositoryMaker.run(ARGV[0], organization)
   else
     puts "Organization: #{organization}"
-    Reposit::RepositoryMaker.run(ARGV[0], options[:organization])
+    Reposit::RepositoryMaker.run(ARGV[0], organization)
   end
 end
