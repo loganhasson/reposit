@@ -27,6 +27,7 @@ else
     puts `reposit --help`
   elsif !Reposit::SetupChecker.check
     Reposit::CredentialsSetter.run
+    puts "Organization: #{organization}"
     Reposit::RepositoryMaker.run(ARGV[0], organization)
   else
     Reposit::RepositoryMaker.run(ARGV[0], organization)
