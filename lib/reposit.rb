@@ -61,7 +61,7 @@ module Reposit
     end
 
     def get_credentials
-      File.readlines(File.expand_path('~', '/.reposit')).map do |credential|
+      File.readlines(File.expand_path('~') + '/.reposit').map do |credential|
         credential
       end
     end
@@ -77,14 +77,13 @@ module Reposit
     def run
       print "GitHub username: "
       self.username = gets.chomp
-      puts ""
       print "API Key: "
       self.api_key = gets.chomp
       write_credentials
     end
 
     def write_credentials
-      File.new(File.expand_path('~', '/.reposit'), 'w+') do |f|
+      File.open(File.expand_path('~') + '/.reposit', 'w+') do |f|
         f.write username + '\n'
         f.write api_key
       end
