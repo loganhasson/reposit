@@ -14,7 +14,8 @@ OptionParser.new do |opts|
 end.parse!
 
 if setup
-  FileUtils.rm(File.expand_path('~') + '/.reposit')
+  path = File.expand_path('~') + '/.reposit'
+  `rm #{path}`
 end
 
 if !ARGV[0]
