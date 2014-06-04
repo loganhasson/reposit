@@ -110,9 +110,9 @@ module Reposit
 
     def run
       print "GitHub username: "
-      self.username = gets.chomp
+      self.username = $stdin.gets.chomp
       print "API Key: "
-      self.api_key = gets.chomp
+      self.api_key = $stdin.gets.chomp
       write_credentials
     end
 
