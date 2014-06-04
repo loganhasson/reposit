@@ -69,6 +69,10 @@ module Reposit
 
   class CredentialsSetter
     attr_reader :username, :api_key
+    
+    def self.run
+      new.run
+    end
 
     def run
       print "GitHub username: "
@@ -80,7 +84,7 @@ module Reposit
     end
 
     def write_credentials
-      File.open('~/.reposit', 'w+') do |f|
+      File.new('~/.reposit', 'w+') do |f|
         f.write username + '\n'
         f.write api_key
       end
