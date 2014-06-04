@@ -84,7 +84,7 @@ module Reposit
     end
 
     def write_credentials
-      File.open(File.expand_path('~', '/.reposit'), 'w+') do |f|
+      File.new(File.expand_path('~', '/.reposit'), 'w+') do |f|
         f.write username + '\n'
         f.write api_key
       end
