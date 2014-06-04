@@ -2,6 +2,7 @@ require "reposit/version"
 require "json"
 require "faraday"
 require "ap"
+require "fileutils"
 
 module Reposit
   class RepositoryMaker
