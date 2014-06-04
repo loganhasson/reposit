@@ -1,4 +1,5 @@
 require "reposit/version"
+require "json"
 
 module Reposit
   class RepositoryMaker
@@ -16,12 +17,41 @@ module Reposit
       credential_reader = CredentialsReader.new
       username = credential_reader.username
       api_key = credential_reader.api_key
-      `curl -s -u '#{username}:#{api_key}' https://api.github.com/user/repos -d "{\"name\":\"#{repo_name}\"}" | sed -n '/"ssh_url"/p' | gawk 'match($0, /:{1}\s"(.*)"/, ary) {print ary[1]}' | pbcopy`
+      conn = Faraday.new(url: 'https://api.github.com') do |faraday|
+        faraday.adapter  Faraday.default_adapter
+        faraday.basic_auth(username, api_key)
+      end
+
+      response = conn.post do |req|
+        req.url '/user/repos'
+        req.body = "{ \"name\": \"#{repo_name}\" }"
+      end
+
+      copy_response(response)
+    end
+
+    def copy_response(response)
+      original_stdout = $stdout
+      $stdout = fake = StringIO.new
+      
+      begin
+        ap JSON.parse(response.body)
+      ensure
+        $stdout = original_stdout
+      end
+
+      File.open('temp_response', 'w+') do |f|
+        f.write fake.string
+      end
+
+      `sed -n '/"ssh_url"/p' temp_response | gawk 'match($0, /m{1}"(.*)"/, ary) {print ary[1]}' | pbcopy`
+
+      FileUtils.rm('temp_response')
     end
   end
 
   class SetupChecker
-    attr_reader :lines
+    attr_accessor :lines
 
     def initialize
       @lines = 0
