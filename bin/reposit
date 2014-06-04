@@ -19,7 +19,7 @@ if setup
   Reposit::CredentialsSetter.run
 else
   if !ARGV[0]
-    puts "For help: reposit --help"
+    puts `reposit --help`
   elsif !Reposit::SetupChecker.check
     Reposit::CredentialsSetter.run
     Reposit::RepositoryMaker.run(ARGV[0])
