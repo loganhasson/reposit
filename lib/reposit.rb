@@ -1,5 +1,6 @@
 require "reposit/version"
 require "json"
+require "faraday"
 
 module Reposit
   class RepositoryMaker
