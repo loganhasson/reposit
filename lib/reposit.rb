@@ -6,14 +6,15 @@ require "fileutils"
 
 module Reposit
   class RepositoryMaker
-    attr_reader :repo_name
+    attr_reader :repo_name, :org_name
 
-    def initialize(repo_name)
+    def initialize(repo_name, org_name)
       @repo_name = repo_name
+      @org_name = org_name
     end
 
-    def self.run(repo_name)
-      new(repo_name).create
+    def self.run(repo_name, org_name)
+      new(repo_name, org_name).create
     end
 
     def create
@@ -25,6 +26,14 @@ module Reposit
         faraday.basic_auth(username, api_key)
       end
 
+      if org_name
+        url = "/orgs/#{org_name}/repos"
+        body = "{ \"name\": \"#{repo_name}\", \"private\": \"true\" }"
+      else
+        url = "/user/repos"
+        body = "{ \"name\": \"#{repo_name}\" }"
+      end
+      
       response = conn.post do |req|
         req.url '/user/repos'
         req.body = "{ \"name\": \"#{repo_name}\" }"

@@ -40,7 +40,6 @@ If repositories aren't being created and/or the SSH url isn't being copied to yo
 
 ## TODO
 
-1. Add creation of repos on an organization
-2. Add ability to specify public or private repos
+1. Add ability to specify public or private repos
 
 Built in NYC by [@loganhasson](http://twitter.com/loganhasson)

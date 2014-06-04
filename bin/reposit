@@ -4,12 +4,17 @@ require 'reposit'
 require 'optparse'
 
 setup = false
+organization = nil
 
 OptionParser.new do |opts|
   opts.banner = "Usage: reposit <repository_name> [options]"
 
-  opts.on("-s", "--setup", "Reset your GitHub credentials") do |v|
+  opts.on("-s", "--setup", "Reset your GitHub credentials") do |s|
     setup = true
+  end
+
+  opts.on("-o", "--organzation", "Create (private) repository on an organization") do |o|
+    organization = o
   end
 end.parse!
 
@@ -22,8 +27,8 @@ else
     puts `reposit --help`
   elsif !Reposit::SetupChecker.check
     Reposit::CredentialsSetter.run
-    Reposit::RepositoryMaker.run(ARGV[0])
+    Reposit::RepositoryMaker.run(ARGV[0], organization)
   else
-    Reposit::RepositoryMaker.run(ARGV[0])
+    Reposit::RepositoryMaker.run(ARGV[0], organization)
   end
 end
