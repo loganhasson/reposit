@@ -13,7 +13,7 @@ OptionParser.new do |opts|
     setup = true
   end
 
-  opts.on("-o", "--organzation", "Create (private) repository on an organization") do |o|
+  opts.on("-o", "--organzation NAME", "Create (private) repository on an organization") do |o|
     organization = o
   end
 end.parse!
