@@ -62,13 +62,17 @@ module Reposit
 
     def get_credentials
       File.readlines(File.expand_path('~') + '/.reposit').map do |credential|
-        credential
+        credential.strip
       end
     end
   end
 
   class CredentialsSetter
-    attr_writer :username, :api_key
+    attr_accessor :username, :api_key
+
+    def initialize
+      @username, @api_key = "", ""
+    end
     
     def self.run
       new.run
@@ -84,7 +88,7 @@ module Reposit
 
     def write_credentials
       File.open(File.expand_path('~') + '/.reposit', 'w+') do |f|
-        f.write username + '\n'
+        f.puts username
         f.write api_key
       end
     end
