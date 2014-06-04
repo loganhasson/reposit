@@ -18,9 +18,15 @@ Reposit creates a new repository on GitHub and copies the SSH url to your clipbo
 2. From your command line, run:
 
   ```bash
-  reposit <repository_name>
+  $ reposit <repository_name>
   ```
 3. On first run, you will be asked to enter your GitHub username and newly generated API key.
+
+## Optional Usage
+
+```bash
+$ reposit <repository_name> -o <organization_name>
+```
 
 ## Troubleshooting
 
