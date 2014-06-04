@@ -1,6 +1,21 @@
 #!/usr/bin/env ruby
 
 require 'reposit'
+require 'optparse'
+
+setup = false
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: reposit <repository_name> [options]"
+
+  opts.on("-s", "--setup", "Re-setup your GitHub credentials") do |v|
+    setup = true
+  end
+end.parse!
+
+if setup
+  FileUtils.rm(File.expand_path('~') + '/.reposit')
+end
 
 if !ARGV[0]
   puts "Usage: reposit <repository_name>"

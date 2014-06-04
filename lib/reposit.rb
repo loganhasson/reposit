@@ -9,7 +9,7 @@ module Reposit
       @repo_name = repo_name
     end
 
-    def run(repo_name)
+    def self.run(repo_name)
       new(repo_name).create
     end
 
