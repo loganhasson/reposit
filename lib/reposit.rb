@@ -33,10 +33,10 @@ module Reposit
         url = "/user/repos"
         body = "{ \"name\": \"#{repo_name}\" }"
       end
-      
+
       response = conn.post do |req|
-        req.url '/user/repos'
-        req.body = "{ \"name\": \"#{repo_name}\" }"
+        req.url url
+        req.body = body
       end
 
       copy_response(response)
