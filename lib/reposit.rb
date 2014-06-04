@@ -40,7 +40,7 @@ module Reposit
     end
 
     def file_exists?
-      File.exist?('~/.reposit')
+      File.exist?(File.expand_path('~') + '/.reposit')
     end
 
     def has_two_lines?
