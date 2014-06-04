@@ -6,6 +6,10 @@ Quickly create GitHub repos from the command line.
 
 `$ gem install reposit`
 
+## Requirements
+
+Requires `gawk`. Install with homebrew: `$ brew install gawk`
+
 ## Usage
 
 Reposit creates a new repository on GitHub and copies the SSH url to your clipboard.
@@ -30,3 +34,5 @@ Reposit creates a new repository on GitHub and copies the SSH url to your clipbo
 
 1. Add creation of repos on an organization
 2. Add ability to specify public or private repos
+
+Built in NYC by [@loganhasson](http://twitter.com/loganhasson)
