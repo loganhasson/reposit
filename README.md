@@ -22,6 +22,14 @@ Reposit creates a new repository on GitHub and copies the SSH url to your clipbo
   ```
 3. On first run, you will be asked to enter your GitHub username and newly generated API key.
 
+## Troubleshooting
+
+If repositories aren't being created and/or the SSH url isn't being copied to your clipboard, it probably means your credentials are incorrect. Reset them by running:
+
+  ```bash
+  $ reposit --setup
+  ```
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/reposit/fork )

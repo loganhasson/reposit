@@ -8,7 +8,7 @@ setup = false
 OptionParser.new do |opts|
   opts.banner = "Usage: reposit <repository_name> [options]"
 
-  opts.on("-s", "--setup", "Re-setup your GitHub credentials") do |v|
+  opts.on("-s", "--setup", "Reset your GitHub credentials") do |v|
     setup = true
   end
 end.parse!
