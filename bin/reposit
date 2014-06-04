@@ -29,7 +29,6 @@ else
     Reposit::CredentialsSetter.run
     Reposit::RepositoryMaker.run(ARGV[0], organization)
   else
-    puts "Organization: #{organization}"
     Reposit::RepositoryMaker.run(ARGV[0], organization)
   end
 end
