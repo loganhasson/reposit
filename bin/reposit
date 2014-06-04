@@ -2,7 +2,6 @@
 
 require 'reposit'
 require 'optparse'
-require 'pry'
 
 setup = false
 organization = nil
@@ -28,9 +27,9 @@ else
     puts `reposit --help`
   elsif !Reposit::SetupChecker.check
     Reposit::CredentialsSetter.run
-    puts "Organization: #{organization}"
     Reposit::RepositoryMaker.run(ARGV[0], organization)
   else
+    puts "Organization: #{organization}"
     Reposit::RepositoryMaker.run(ARGV[0], organization)
   end
 end

@@ -25,7 +25,7 @@ module Reposit
         faraday.adapter  Faraday.default_adapter
         faraday.basic_auth(username, api_key)
       end
-      binding.pry
+
       if org_name
         url = "/orgs/#{org_name}/repos"
         body = "{ \"name\": \"#{repo_name}\", \"private\": \"true\" }"
