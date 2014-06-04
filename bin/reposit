@@ -2,6 +2,7 @@
 
 require 'reposit'
 require 'optparse'
+require 'pry'
 
 setup = false
 organization = nil
