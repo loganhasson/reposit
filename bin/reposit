@@ -15,14 +15,15 @@ end.parse!
 
 if setup
   path = File.expand_path('~') + '/.reposit'
-  `rm #{path}`
-end
-
-if !ARGV[0]
-  puts "For help: reposit --help"
-elsif !Reposit::SetupChecker.check
+  `rm #{path} > /dev/null 2>&1`
   Reposit::CredentialsSetter.run
-  Reposit::RepositoryMaker.run(ARGV[0])
 else
-  Reposit::RepositoryMaker.run(ARGV[0])
+  if !ARGV[0]
+    puts "For help: reposit --help"
+  elsif !Reposit::SetupChecker.check
+    Reposit::CredentialsSetter.run
+    Reposit::RepositoryMaker.run(ARGV[0])
+  else
+    Reposit::RepositoryMaker.run(ARGV[0])
+  end
 end
